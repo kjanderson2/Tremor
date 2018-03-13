@@ -1,0 +1,7 @@
+package android.kaitlynanderson.com.tremor.Model
+
+/**
+ * Created by kaitlynanderson on 3/13/18.
+ * Model class for Earthquake response from API containing a list of Earthquake objects
+ */
+data class Earthquakes(val earthquakes: List<Earthquake>);
