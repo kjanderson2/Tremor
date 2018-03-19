@@ -3,5 +3,13 @@
     <string name="action_refresh">Refresh</string>
 
     <string name="item_magnitude">Magnitude: %1$s</string>
-    <string name="item_location">Latitude: %1$s Longitude %2$s</string>
+    <string name="item_depth">Depth: %1$s</string>
+    <string name="item_location">Latitude: %1$s \nLongitude: %2$s</string>
+    <string name="item_date">Date: %1$s</string>
+    <string name="action_info">Information</string>
+    <string name="mag_low"><![CDATA[Magnitude < 2.5]]></string>
+    <string name="mag_med"><![CDATA[2.5 < Magnitude < 6.0]]></string>
+    <string name="mag_high"><![CDATA[Magnitude > 6.0]]></string>
+    <string name="info_body">In this list you are viewing recent earthquakes ordered by magnitude in a certain area. To update the area, please select settings from the menu. Each earthquake item has a date, a location, a magnitude, and a depth. \n\nThe <b>date</b> refers to the date the earthquake occurred.\n\nThe <b>location</b> is given in longitude and latitude and refers to the location of the epicenter of the earthquake.\n\nThe <b>magnitude</b> refers to the magnitude of the quake on the Richter scale. The color of the earthquake cell also relates to the magnitude of the quake (see below).\n\nThe <b>depth</b> refers to how far below the surface the earthquake occurred</string>
+    <string name="info_dialog_button">OK</string>
 </resources>

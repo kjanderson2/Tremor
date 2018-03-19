@@ -27,6 +27,8 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
+    private static final String TAG_INFO_DIALOG = "InfoDialogTag";
+
     private ProgressBar mProgressBar;
 
     private EarthquakeAdapter mEarthquakeAdapter;
@@ -71,12 +73,19 @@ public class ListActivity extends AppCompatActivity {
             case R.id.action_refresh:
                 requestEarthquakes();
                 return true;
+            case R.id.action_info:
+                openInfoDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void updateView(List<Earthquake> list) {
+    private void openInfoDialog() {
+        InfoDialogFragment dialogFragment = new InfoDialogFragment();
+        dialogFragment.show(getFragmentManager(), TAG_INFO_DIALOG);
+    }
+
+    private void updateView(List<Earthquake> list) {
         mProgressBar.setVisibility(View.GONE);
         mEarthquakeAdapter.setEarthquakeItems(list);
     }

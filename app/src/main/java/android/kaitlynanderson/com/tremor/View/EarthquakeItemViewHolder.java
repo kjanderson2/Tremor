@@ -25,6 +25,8 @@ class EarthquakeItemViewHolder extends RecyclerView.ViewHolder {
 
     private TextView mMagnitudeView;
 
+    private TextView mDepthView;
+
     private TextView mDateView;
 
     private TextView mLocationView;
@@ -34,6 +36,7 @@ class EarthquakeItemViewHolder extends RecyclerView.ViewHolder {
 
         mContainer = itemView.findViewById(R.id.view_container);
         mMagnitudeView = itemView.findViewById(R.id.textView_magnitude);
+        mDepthView = itemView.findViewById(R.id.textView_depth);
         mDateView = itemView.findViewById(R.id.textView_date);
         mLocationView = itemView.findViewById(R.id.textView_location);
     }
@@ -43,7 +46,10 @@ class EarthquakeItemViewHolder extends RecyclerView.ViewHolder {
         mMagnitudeView
                 .setText(context.getString(R.string.item_magnitude,
                         String.valueOf(earthquake.getMagnitude())));
-        mDateView.setText(formatDate(earthquake.getDatetime()));
+        mDepthView.setText(
+                context.getString(R.string.item_depth, String.valueOf(earthquake.getDepth())));
+        mDateView.setText(
+                context.getString(R.string.item_date, formatDate(earthquake.getDatetime())));
         mLocationView.setText(
                 context.getString(R.string.item_location, String.valueOf(earthquake.getLat()),
                         String.valueOf(earthquake.getLng())));
