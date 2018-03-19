@@ -1,6 +1,7 @@
-package android.kaitlynanderson.com.tremor;
+package android.kaitlynanderson.com.tremor.View;
 
 import android.kaitlynanderson.com.tremor.Model.Earthquake;
+import android.kaitlynanderson.com.tremor.R;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;

@@ -1,6 +1,10 @@
-package android.kaitlynanderson.com.tremor;
+package android.kaitlynanderson.com.tremor.View;
 
 import android.kaitlynanderson.com.tremor.Model.Earthquake;
+import android.kaitlynanderson.com.tremor.Model.EarthquakeResult;
+import android.kaitlynanderson.com.tremor.R;
+import android.kaitlynanderson.com.tremor.RequestEarthquakeCommand;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,8 +37,7 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
 
     private EarthquakeAdapter mEarthquakeAdapter;
 
-    private Runnable mGetListRunnable;
-
+    private AsyncTask getEarthquakesTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,8 +60,7 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
         super.onResume();
 
         mEarthquakeAdapter.setListener(this);
-        updateView(null);
-        //TODO run asynctask here
+        requestEarthquakes();
     }
 
     @Override
@@ -66,6 +70,10 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
         mEarthquakeAdapter.setListener(null);
     }
 
+    private void requestEarthquakes() {
+        GetEarthquakeTask asyncTask = new GetEarthquakeTask(this);
+        asyncTask.execute();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -77,7 +85,7 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_refresh:
-                //TODO refresh list
+                requestEarthquakes();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -85,28 +93,42 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
     }
 
     public void updateView(List<Earthquake> list) {
-        List<Earthquake> eList = new ArrayList<>();
-
-        Earthquake test1 = new Earthquake(new Date(),1f, 1f, "Source", "id", 1f, 1f);
-        Earthquake test2 = new Earthquake(new Date(),2f, 2f, "Source", "id", 2f, 2f);
-        Earthquake test3 = new Earthquake(new Date(),3f, 3f, "Source", "id", 3f, 3f);
-        Earthquake test4 = new Earthquake(new Date(),4f, 4f, "Source", "id", 4f, 4f);
-        Earthquake test5 = new Earthquake(new Date(),5f, 5f, "Source", "id", 5f, 5f);
-        Earthquake test6 = new Earthquake(new Date(),6f, 6f, "Source", "id", 6f, 6f);
-        Earthquake test7 = new Earthquake(new Date(),7f, 7f, "Source", "id", 7f, 7f);
-
-        eList.add(test1);
-        eList.add(test2);
-        eList.add(test3);
-        eList.add(test4);
-        eList.add(test5);
-        eList.add(test6);
-        eList.add(test7);
-        mEarthquakeAdapter.setEarthquakeItems(eList);
+        mProgressBar.setVisibility(View.GONE);
+        mEarthquakeAdapter.setEarthquakeItems(list);
     }
 
     @Override
     public void earthquakeClicked(Earthquake earthquake) {
         //TODO open earthquake view
+    }
+
+    private static class GetEarthquakeTask extends AsyncTask<Void, Void, EarthquakeResult> {
+
+        private WeakReference<ListActivity> mActivityReference;
+
+        GetEarthquakeTask(ListActivity context){
+            mActivityReference = new WeakReference<>(context);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            ProgressBar progressBar = mActivityReference.get().mProgressBar;
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected EarthquakeResult doInBackground(Void... voids) {
+            RequestEarthquakeCommand command = new RequestEarthquakeCommand();
+            return command.execute();
+        }
+
+        @Override
+        protected void onPostExecute(EarthquakeResult earthquakeResult) {
+            ListActivity activity = mActivityReference.get();
+            if (activity == null || activity.isFinishing()) return;
+
+            activity.updateView(earthquakeResult.getEarthquakes());
+        }
     }
 }
