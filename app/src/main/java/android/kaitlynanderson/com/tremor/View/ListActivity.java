@@ -18,8 +18,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,17 +25,13 @@ import java.util.List;
  * Main activity that shows a list of earthquakes from an API
  */
 
-public class ListActivity extends AppCompatActivity implements EarthquakeAdapter.Listener {
+public class ListActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
+    private static final String TAG_INFO_DIALOG = "InfoDialogTag";
 
-    private RecyclerView.LayoutManager mLayoutManager;
-    
     private ProgressBar mProgressBar;
 
     private EarthquakeAdapter mEarthquakeAdapter;
-
-    private AsyncTask getEarthquakesTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,26 +42,18 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
         setSupportActionBar(toolbar);
 
         mProgressBar = findViewById(R.id.progressBar);
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         mEarthquakeAdapter = new EarthquakeAdapter();
-        mRecyclerView.setAdapter(mEarthquakeAdapter);
+        recyclerView.setAdapter(mEarthquakeAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        mEarthquakeAdapter.setListener(this);
         requestEarthquakes();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        mEarthquakeAdapter.setListener(null);
     }
 
     private void requestEarthquakes() {
@@ -87,19 +73,21 @@ public class ListActivity extends AppCompatActivity implements EarthquakeAdapter
             case R.id.action_refresh:
                 requestEarthquakes();
                 return true;
+            case R.id.action_info:
+                openInfoDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void updateView(List<Earthquake> list) {
-        mProgressBar.setVisibility(View.GONE);
-        mEarthquakeAdapter.setEarthquakeItems(list);
+    private void openInfoDialog() {
+        InfoDialogFragment dialogFragment = new InfoDialogFragment();
+        dialogFragment.show(getFragmentManager(), TAG_INFO_DIALOG);
     }
 
-    @Override
-    public void earthquakeClicked(Earthquake earthquake) {
-        //TODO open earthquake view
+    private void updateView(List<Earthquake> list) {
+        mProgressBar.setVisibility(View.GONE);
+        mEarthquakeAdapter.setEarthquakeItems(list);
     }
 
     private static class GetEarthquakeTask extends AsyncTask<Void, Void, EarthquakeResult> {

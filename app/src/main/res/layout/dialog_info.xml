@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:id="@+id/imageView_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_info_outline_black_24dp"
+                tools:ignore="ContentDescription"/>
+
+        <TextView
+                android:id="@+id/textView_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/action_info"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_info"
+                app:layout_constraintStart_toEndOf="@+id/imageView_info"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/textView_info_body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/info_body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_info"/>
+
+        <View
+                android:id="@+id/view_mag_low"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_green"
+                app:layout_constraintEnd_toStartOf="@+id/textview_mag_low"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_info_body"/>
+
+        <View
+                android:id="@+id/view_mag_med"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_yellow"
+                app:layout_constraintStart_toStartOf="@+id/view_mag_low"
+                app:layout_constraintTop_toBottomOf="@+id/view_mag_low"/>
+
+        <View
+                android:id="@+id/view_mag_high"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_red"
+                app:layout_constraintStart_toStartOf="@+id/view_mag_med"
+                app:layout_constraintTop_toBottomOf="@+id/view_mag_med"/>
+
+        <TextView
+                android:id="@+id/textview_mag_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mag_low"
+                app:layout_constraintBottom_toBottomOf="@+id/view_mag_low"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/view_mag_low"
+                app:layout_constraintTop_toTopOf="@+id/view_mag_low"/>
+
+        <TextView
+                android:id="@+id/textView_mag_med"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mag_med"
+                app:layout_constraintBottom_toBottomOf="@+id/view_mag_med"
+                app:layout_constraintStart_toEndOf="@+id/view_mag_med"
+                app:layout_constraintTop_toTopOf="@+id/view_mag_med"/>
+
+        <TextView
+                android:id="@+id/textView_mag_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/mag_high"
+                app:layout_constraintBottom_toBottomOf="@+id/view_mag_high"
+                app:layout_constraintStart_toEndOf="@+id/view_mag_high"
+                app:layout_constraintTop_toTopOf="@+id/view_mag_high"/>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

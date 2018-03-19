@@ -13,21 +13,16 @@ import java.util.List;
 
 /**
  * Created by kaitlynanderson on 3/18/18.
+ * Adapter for recycler view containing all earthquakes returned from API
  */
 
 public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeItemViewHolder> {
 
     private List<Earthquake> mEarthquakeList = new ArrayList<>();
 
-    private Listener mListener;
-
-    public void setEarthquakeItems(List<Earthquake> items) {
+    void setEarthquakeItems(List<Earthquake> items) {
         mEarthquakeList = items;
         notifyDataSetChanged();
-    }
-
-    public void setListener(Listener listener) {
-        mListener = listener;
     }
 
     @NonNull
@@ -49,7 +44,4 @@ public class EarthquakeAdapter extends RecyclerView.Adapter<EarthquakeItemViewHo
         return mEarthquakeList.size();
     }
 
-    public interface Listener {
-        void earthquakeClicked(Earthquake earthquake);
-    }
 }
