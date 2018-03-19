@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -43,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private TextView mDateExplanationText;
 
+    private Button mRestoreDefaultsButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,32 @@ public class SettingsActivity extends AppCompatActivity {
         mMinMagEditText = findViewById(R.id.editText_min_mag);
         mMaxRowsEditText = findViewById(R.id.editText_max_rows);
         mDateExplanationText = findViewById(R.id.textView_date_explanation);
+        mRestoreDefaultsButton = findViewById(R.id.button_restore_defaults);
+        mRestoreDefaultsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrefsHelper.restoreDefaults(SettingsActivity.this);
+                updateViewsFromPrefs();
+            }
+        });
 
+        updateViewsFromPrefs();
+
+        mUseDateCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mDateEditText.setEnabled(true);
+                    mDateExplanationText.setVisibility(View.VISIBLE);
+                } else {
+                    mDateEditText.setEnabled(false);
+                    mDateExplanationText.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void updateViewsFromPrefs() {
         mNorthEditText.setText(String.valueOf(PrefsHelper.getCoordinateNorth(this)));
         mEastEditText.setText(String.valueOf(PrefsHelper.getCoordinateEast(this)));
         mSouthEditText.setText(String.valueOf(PrefsHelper.getCoordinateSouth(this)));
@@ -83,19 +111,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
         mMinMagEditText.setText(String.valueOf(PrefsHelper.getMinMagnitude(this)));
         mMaxRowsEditText.setText(String.valueOf(PrefsHelper.getMaxRows(this)));
-
-        mUseDateCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mDateEditText.setEnabled(true);
-                    mDateExplanationText.setVisibility(View.VISIBLE);
-                } else {
-                    mDateEditText.setEnabled(false);
-                    mDateExplanationText.setVisibility(View.GONE);
-                }
-            }
-        });
     }
 
     @Override

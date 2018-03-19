@@ -29,4 +29,5 @@
     <string name="settings_back_alert_message">You are leaving without saving your changes by pressing the check in the upper right corner. Are you sure you want to exit without saving?</string>
     <string name="settings_back_alert_pos_button">Exit</string>
     <string name="settings_back_alert_neg_button">Cancel</string>
+    <string name="button_restore_defaults">Restore Defaults</string>
 </resources>

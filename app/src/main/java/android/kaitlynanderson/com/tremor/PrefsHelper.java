@@ -33,7 +33,11 @@ public class PrefsHelper {
 
     public static final String KEY_MIN_MAGNITUDE = "key_min_magnitude";
 
+    public static final Float DEFAULT_MIN_MAGNITUDE = 0f;
+
     public static final String KEY_MAX_ROWS = "key_max_rows";
+
+    public static final int DEFAULT_MAX_ROWS = 20;
 
     public static void editPrefFloat(Context context, String prefKey, Float newValue) {
         SharedPreferences sharedPreferences = context
@@ -106,13 +110,28 @@ public class PrefsHelper {
     public static Float getMinMagnitude(Context context) {
         SharedPreferences sharedPreferences = context
                 .getSharedPreferences(PREF_KEY_SETTINGS, Context.MODE_PRIVATE);
-        return sharedPreferences.getFloat(KEY_MIN_MAGNITUDE, 0f);
+        return sharedPreferences.getFloat(KEY_MIN_MAGNITUDE, DEFAULT_MIN_MAGNITUDE);
     }
 
-    public static Integer getMaxRows(Context context) {
+    public static int getMaxRows(Context context) {
         SharedPreferences sharedPreferences = context
                 .getSharedPreferences(PREF_KEY_SETTINGS, Context.MODE_PRIVATE);
-        return sharedPreferences.getInt(KEY_MAX_ROWS, 20);
+        return sharedPreferences.getInt(KEY_MAX_ROWS, DEFAULT_MAX_ROWS);
+    }
+
+    public static void restoreDefaults(Context context){
+        SharedPreferences sharedPreferences = context
+                .getSharedPreferences(PREF_KEY_SETTINGS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat(KEY_COORDINATE_NORTH, DEFAULT_COORDINATE_NORTH);
+        editor.putFloat(KEY_COORDINATE_EAST, DEFAULT_COORDINATE_EAST);
+        editor.putFloat(KEY_COORDINATE_SOUTH, DEFAULT_COORDINATE_SOUTH);
+        editor.putFloat(KEY_COORDINATE_WEST, DEFAULT_COORDINATE_WEST);
+        editor.putBoolean(KEY_USE_DATE, false);
+        editor.putString(KEY_DATE, "");
+        editor.putFloat(KEY_MIN_MAGNITUDE, DEFAULT_MIN_MAGNITUDE);
+        editor.putInt(KEY_MAX_ROWS, DEFAULT_MAX_ROWS);
+        editor.apply();
     }
 
 }
