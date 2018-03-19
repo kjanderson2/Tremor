@@ -12,4 +12,21 @@
     <string name="mag_high"><![CDATA[Magnitude > 6.0]]></string>
     <string name="info_body">In this list you are viewing recent earthquakes ordered by magnitude in a certain area. To update the area, please select settings from the menu. Each earthquake item has a date, a location, a magnitude, and a depth. \n\nThe <b>date</b> refers to the date the earthquake occurred.\n\nThe <b>location</b> is given in longitude and latitude and refers to the location of the epicenter of the earthquake.\n\nThe <b>magnitude</b> refers to the magnitude of the quake on the Richter scale. The color of the earthquake cell also relates to the magnitude of the quake (see below).\n\nThe <b>depth</b> refers to how far below the surface the earthquake occurred</string>
     <string name="info_dialog_button">OK</string>
+    <string name="settings">Settings</string>
+
+    <string name="settings_description">We are currently getting earthquakes from the Geonames Earthquake API with the below parameters. Feel free to change up the parameters as needed.</string>
+    <string name="settings_bounding_box">Bounding Box</string>
+    <string name="settings_bounding_box_north">North</string>
+    <string name="settings_bounding_box_east">East</string>
+    <string name="settings_bounding_box_south">South</string>
+    <string name="settings_bounding_box_west">West</string>
+    <string name="settings_date">Date</string>
+    <string name="settings_use_date">Use Date?</string>
+    <string name="settings_min_magnitude">Minimum Magnitude</string>
+    <string name="settings_max_rows">Maximum Rows</string>
+    <string name="settings_date_explanation">Must be in format yyyy-MM-dd</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="settings_back_alert_message">You are leaving without saving your changes by pressing the check in the upper right corner. Are you sure you want to exit without saving?</string>
+    <string name="settings_back_alert_pos_button">Exit</string>
+    <string name="settings_back_alert_neg_button">Cancel</string>
 </resources>

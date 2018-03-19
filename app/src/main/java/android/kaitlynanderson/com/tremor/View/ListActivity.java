@@ -1,7 +1,10 @@
 package android.kaitlynanderson.com.tremor.View;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.kaitlynanderson.com.tremor.Model.Earthquake;
 import android.kaitlynanderson.com.tremor.Model.EarthquakeResult;
+import android.kaitlynanderson.com.tremor.PrefsHelper;
 import android.kaitlynanderson.com.tremor.R;
 import android.kaitlynanderson.com.tremor.RequestEarthquakeCommand;
 import android.os.AsyncTask;
@@ -60,24 +63,34 @@ public class ListActivity extends AppCompatActivity {
         GetEarthquakeTask asyncTask = new GetEarthquakeTask(this);
         asyncTask.execute();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_refresh:
                 requestEarthquakes();
                 return true;
             case R.id.action_info:
                 openInfoDialog();
+                return true;
+            case R.id.action_settings:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void openSettings() {
+        Intent settingsIntent = new Intent(this, SettingsActivity.class);
+        startActivity(settingsIntent);
     }
 
     private void openInfoDialog() {
@@ -94,7 +107,7 @@ public class ListActivity extends AppCompatActivity {
 
         private WeakReference<ListActivity> mActivityReference;
 
-        GetEarthquakeTask(ListActivity context){
+        GetEarthquakeTask(ListActivity context) {
             mActivityReference = new WeakReference<>(context);
         }
 
@@ -108,13 +121,23 @@ public class ListActivity extends AppCompatActivity {
         @Override
         protected EarthquakeResult doInBackground(Void... voids) {
             RequestEarthquakeCommand command = new RequestEarthquakeCommand();
-            return command.execute();
+            Activity context = mActivityReference.get();
+            return command.execute(PrefsHelper.getCoordinateNorth(context),
+                    PrefsHelper.getCoordinateSouth(context),
+                    PrefsHelper.getCoordinateEast(context),
+                    PrefsHelper.getCoordinateWest(context),
+                    PrefsHelper.getMinMagnitude(context),
+                    PrefsHelper.getDate(context),
+                    PrefsHelper.shouldUseDate(context),
+                    PrefsHelper.getMaxRows(context));
         }
 
         @Override
         protected void onPostExecute(EarthquakeResult earthquakeResult) {
             ListActivity activity = mActivityReference.get();
-            if (activity == null || activity.isFinishing()) return;
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
 
             activity.updateView(earthquakeResult.getEarthquakes());
         }

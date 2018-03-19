@@ -7,7 +7,7 @@ import android.kaitlynanderson.com.tremor.Model.EarthquakeResult
  * Kotlin command for getting earthquakes from api using EarthquakeRequest
  */
 class RequestEarthquakeCommand : Command<EarthquakeResult> {
-    override fun execute(): EarthquakeResult {
-        return EarthquakeRequest().execute()
+    override fun execute(north: Float, south: Float, east: Float, west: Float, minMag: Float, date: String, useDate: Boolean, maxRows: Int): EarthquakeResult {
+        return EarthquakeRequest().execute(north, south, east, west, minMag, date, useDate, maxRows)
     }
 }

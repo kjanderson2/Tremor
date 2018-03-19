@@ -9,10 +9,17 @@ import java.net.URL
  * Request class housing the API URL and running the url to be read with gson conversion
  */
 class EarthquakeRequest {
-    private val API_URL = "http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman&maxRows=20"
+    private val BASE_API_URL = "http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman&maxRows=20"
 
-    fun execute(): EarthquakeResult {
-        val earthquakesJsonString = URL(API_URL).readText()
+    fun execute(north: Float, south: Float, east: Float, west: Float, minMag: Float, date: String, useDate: Boolean, maxRows: Int): EarthquakeResult {
+        var QUERY_URL = BASE_API_URL
+        QUERY_URL += "&north=" + north + "&south=" + south + "&east=" + east + "&west=" + west
+        QUERY_URL += "&minMagnitude=" + minMag
+        if (useDate) {
+            QUERY_URL += "&date=" + date
+        }
+        QUERY_URL += "&maxRows=" + maxRows
+        val earthquakesJsonString = URL(QUERY_URL).readText()
         val builder = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()
         return builder.fromJson(earthquakesJsonString, EarthquakeResult::class.java)
     }
