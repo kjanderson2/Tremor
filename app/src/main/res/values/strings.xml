@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Tremor</string>
     <string name="action_refresh">Refresh</string>
+
+    <string name="item_magnitude">Magnitude: %1$s</string>
+    <string name="item_location">Latitude: %1$s Longitude %2$s</string>
 </resources>
