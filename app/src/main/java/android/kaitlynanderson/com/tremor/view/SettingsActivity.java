@@ -67,12 +67,11 @@ public class SettingsActivity extends AppCompatActivity {
         mMinMagEditText = findViewById(R.id.editText_min_mag);
         mMaxRowsEditText = findViewById(R.id.editText_max_rows);
         mDateExplanationText = findViewById(R.id.textView_date_explanation);
-        Button restoreDefaultsButton = findViewById(R.id.button_restore_defaults);
+        final Button restoreDefaultsButton = findViewById(R.id.button_restore_defaults);
         restoreDefaultsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PrefsHelper.restoreDefaults(SettingsActivity.this);
-                updateViewsFromPrefs();
+                restoreDefaults();
             }
         });
 
@@ -90,6 +89,16 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void restoreDefaults() {
+        mNorthEditText.setText(String.valueOf(PrefsHelper.DEFAULT_COORDINATE_NORTH));
+        mEastEditText.setText(String.valueOf(PrefsHelper.DEFAULT_COORDINATE_EAST));
+        mSouthEditText.setText(String.valueOf(PrefsHelper.DEFAULT_COORDINATE_SOUTH));
+        mWestEditText.setText(String.valueOf(PrefsHelper.DEFAULT_COORDINATE_WEST));
+        mUseDateCheckBox.setChecked(false);
+        mMinMagEditText.setText(String.valueOf(PrefsHelper.DEFAULT_MIN_MAGNITUDE));
+        mMaxRowsEditText.setText(String.valueOf(PrefsHelper.DEFAULT_MAX_ROWS));
     }
 
     private void updateViewsFromPrefs() {

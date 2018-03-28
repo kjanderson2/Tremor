@@ -14,19 +14,19 @@ public class PrefsHelper {
 
     public static final String KEY_COORDINATE_NORTH = "key_coordinate_north";
 
-    private static final Float DEFAULT_COORDINATE_NORTH = 90f;
+    public static final Float DEFAULT_COORDINATE_NORTH = 90f;
 
     public static final String KEY_COORDINATE_EAST = "key_coordinate_east";
 
-    private static final Float DEFAULT_COORDINATE_EAST = -22.4f;
+    public static final Float DEFAULT_COORDINATE_EAST = -22.4f;
 
     public static final String KEY_COORDINATE_SOUTH = "key_coordinate_south";
 
-    private static final Float DEFAULT_COORDINATE_SOUTH = -9.9f;
+    public static final Float DEFAULT_COORDINATE_SOUTH = -9.9f;
 
     public static final String KEY_COORDINATE_WEST = "key_coordinate_west";
 
-    private static final Float DEFAULT_COORDINATE_WEST = 55.2f;
+    public static final Float DEFAULT_COORDINATE_WEST = 55.2f;
 
     public static final String KEY_DATE = "key_date";
 
@@ -34,11 +34,11 @@ public class PrefsHelper {
 
     public static final String KEY_MIN_MAGNITUDE = "key_min_magnitude";
 
-    private static final Float DEFAULT_MIN_MAGNITUDE = 0f;
+    public static final Float DEFAULT_MIN_MAGNITUDE = 0f;
 
     public static final String KEY_MAX_ROWS = "key_max_rows";
 
-    private static final int DEFAULT_MAX_ROWS = 20;
+    public static final int DEFAULT_MAX_ROWS = 20;
 
     public static void editPrefFloat(Context context, String prefKey, Float newValue) {
         SharedPreferences sharedPreferences = context
@@ -119,20 +119,4 @@ public class PrefsHelper {
                 .getSharedPreferences(PREF_KEY_SETTINGS, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(KEY_MAX_ROWS, DEFAULT_MAX_ROWS);
     }
-
-    public static void restoreDefaults(Context context){
-        SharedPreferences sharedPreferences = context
-                .getSharedPreferences(PREF_KEY_SETTINGS, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(KEY_COORDINATE_NORTH, DEFAULT_COORDINATE_NORTH);
-        editor.putFloat(KEY_COORDINATE_EAST, DEFAULT_COORDINATE_EAST);
-        editor.putFloat(KEY_COORDINATE_SOUTH, DEFAULT_COORDINATE_SOUTH);
-        editor.putFloat(KEY_COORDINATE_WEST, DEFAULT_COORDINATE_WEST);
-        editor.putBoolean(KEY_USE_DATE, false);
-        editor.putString(KEY_DATE, "");
-        editor.putFloat(KEY_MIN_MAGNITUDE, DEFAULT_MIN_MAGNITUDE);
-        editor.putInt(KEY_MAX_ROWS, DEFAULT_MAX_ROWS);
-        editor.apply();
-    }
-
 }
