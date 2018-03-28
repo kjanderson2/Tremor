@@ -1,6 +1,6 @@
 package android.kaitlynanderson.com.tremor
 
-import android.kaitlynanderson.com.tremor.Model.EarthquakeResult
+import android.kaitlynanderson.com.tremor.model.EarthquakeResult
 import com.google.gson.GsonBuilder
 import java.net.URL
 
@@ -9,11 +9,11 @@ import java.net.URL
  * Request class housing the API URL and running the url to be read with gson conversion
  */
 class EarthquakeRequest {
-    private val BASE_API_URL = "http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman&maxRows=20"
+    private val BASE_API_URL = "http://api.geonames.org/earthquakesJSON?formatted=true&username=mkoppelman"
 
     fun execute(north: Float, south: Float, east: Float, west: Float, minMag: Float, date: String, useDate: Boolean, maxRows: Int): EarthquakeResult {
         var QUERY_URL = BASE_API_URL
-        QUERY_URL += "&north=" + north + "&south=" + south + "&east=" + east + "&west=" + west
+        QUERY_URL += "&north=$north&south=$south&east=$east&west=$west"
         QUERY_URL += "&minMagnitude=" + minMag
         if (useDate) {
             QUERY_URL += "&date=" + date

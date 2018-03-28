@@ -1,6 +1,6 @@
 package android.kaitlynanderson.com.tremor
 
-import android.kaitlynanderson.com.tremor.Model.EarthquakeResult
+import android.kaitlynanderson.com.tremor.model.EarthquakeResult
 
 /**
  * Created by kaitlynanderson on 3/18/18.

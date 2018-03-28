@@ -1,6 +1,6 @@
-package android.kaitlynanderson.com.tremor.View;
+package android.kaitlynanderson.com.tremor.view;
 
-import android.kaitlynanderson.com.tremor.Model.Earthquake;
+import android.kaitlynanderson.com.tremor.model.Earthquake;
 import android.kaitlynanderson.com.tremor.R;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

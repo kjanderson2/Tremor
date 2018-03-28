@@ -1,4 +1,4 @@
-package android.kaitlynanderson.com.tremor.View;
+package android.kaitlynanderson.com.tremor.view;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

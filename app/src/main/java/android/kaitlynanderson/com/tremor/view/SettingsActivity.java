@@ -1,7 +1,6 @@
-package android.kaitlynanderson.com.tremor.View;
+package android.kaitlynanderson.com.tremor.view;
 
 import android.app.AlertDialog;
-import android.app.Presentation;
 import android.content.DialogInterface;
 import android.kaitlynanderson.com.tremor.PrefsHelper;
 import android.kaitlynanderson.com.tremor.R;
@@ -44,8 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     private TextView mDateExplanationText;
 
-    private Button mRestoreDefaultsButton;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +67,8 @@ public class SettingsActivity extends AppCompatActivity {
         mMinMagEditText = findViewById(R.id.editText_min_mag);
         mMaxRowsEditText = findViewById(R.id.editText_max_rows);
         mDateExplanationText = findViewById(R.id.textView_date_explanation);
-        mRestoreDefaultsButton = findViewById(R.id.button_restore_defaults);
-        mRestoreDefaultsButton.setOnClickListener(new View.OnClickListener() {
+        Button restoreDefaultsButton = findViewById(R.id.button_restore_defaults);
+        restoreDefaultsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PrefsHelper.restoreDefaults(SettingsActivity.this);

@@ -1,4 +1,4 @@
-package android.kaitlynanderson.com.tremor.Model
+package android.kaitlynanderson.com.tremor.model
 
 import java.util.Date
 

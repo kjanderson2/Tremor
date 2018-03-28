@@ -1,9 +1,9 @@
-package android.kaitlynanderson.com.tremor.View;
+package android.kaitlynanderson.com.tremor.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.kaitlynanderson.com.tremor.Model.Earthquake;
-import android.kaitlynanderson.com.tremor.Model.EarthquakeResult;
+import android.kaitlynanderson.com.tremor.model.Earthquake;
+import android.kaitlynanderson.com.tremor.model.EarthquakeResult;
 import android.kaitlynanderson.com.tremor.PrefsHelper;
 import android.kaitlynanderson.com.tremor.R;
 import android.kaitlynanderson.com.tremor.RequestEarthquakeCommand;

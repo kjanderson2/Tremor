@@ -5,11 +5,12 @@ import android.content.SharedPreferences;
 
 /**
  * Created by kaitlynanderson on 3/18/18.
+ * Helper class for reading from and writing to Shared Preferences
  */
 
 public class PrefsHelper {
 
-    public static final String PREF_KEY_SETTINGS = "shared_preferences_settings";
+    private static final String PREF_KEY_SETTINGS = "shared_preferences_settings";
 
     public static final String KEY_COORDINATE_NORTH = "key_coordinate_north";
 
@@ -33,11 +34,11 @@ public class PrefsHelper {
 
     public static final String KEY_MIN_MAGNITUDE = "key_min_magnitude";
 
-    public static final Float DEFAULT_MIN_MAGNITUDE = 0f;
+    private static final Float DEFAULT_MIN_MAGNITUDE = 0f;
 
     public static final String KEY_MAX_ROWS = "key_max_rows";
 
-    public static final int DEFAULT_MAX_ROWS = 20;
+    private static final int DEFAULT_MAX_ROWS = 20;
 
     public static void editPrefFloat(Context context, String prefKey, Float newValue) {
         SharedPreferences sharedPreferences = context
