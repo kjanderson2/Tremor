@@ -14,11 +14,11 @@ class EarthquakeRequest {
     fun execute(north: Float, south: Float, east: Float, west: Float, minMag: Float, date: String, useDate: Boolean, maxRows: Int): EarthquakeResult {
         var QUERY_URL = BASE_API_URL
         QUERY_URL += "&north=$north&south=$south&east=$east&west=$west"
-        QUERY_URL += "&minMagnitude=" + minMag
+        QUERY_URL += "&minMagnitude=$minMag"
         if (useDate) {
-            QUERY_URL += "&date=" + date
+            QUERY_URL += "&date=$date"
         }
-        QUERY_URL += "&maxRows=" + maxRows
+        QUERY_URL += "&maxRows=$maxRows"
         val earthquakesJsonString = URL(QUERY_URL).readText()
         val builder = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()
         return builder.fromJson(earthquakesJsonString, EarthquakeResult::class.java)
